@@ -16,4 +16,6 @@ Also write the test cases needed to verify the code correctness. Cover at least 
 - an empty string;
 - a string with more than one space.
 
+For parsing command line arguments, the use of clap library is suggested: https://docs.rs/clap/latest/clap/
+
 
