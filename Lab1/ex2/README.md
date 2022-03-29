@@ -1,4 +1,4 @@
-# Instructions
+# Exercise 2 - Instructions - Luhn_algorithm
 
 Given a number determine whether or not it is valid per the Luhn formula.
 
