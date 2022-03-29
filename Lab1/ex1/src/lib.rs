@@ -3,10 +3,9 @@ pub fn capitalize(s: &str) -> String {
     let space = String::from(" ");
 
     let v: Vec<&str> = s.split(' ').collect();
-    // fare controlli
 
     for st in v {
-        let mut c = st.chars(); //string is turned into a sequence of chars
+        let mut c = st.chars(); 
         let z = match c.next(){
             None => String::new(),
             Some(f) => f.to_uppercase().collect::<String>() + c.as_str(),
