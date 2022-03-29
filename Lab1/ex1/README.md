@@ -2,7 +2,7 @@
 
 Implement a function for capitalizing first char of each word present in a text s, ignoring other upper chars present in it.
 
-- fn capitalize (s: &str) -> String {}
+- fn capitalize (s: &str) -> String { }
 
 Words are separated by one or more space.
 Then, read a sequence of words as argument from command line, call the function and print the outcome.
