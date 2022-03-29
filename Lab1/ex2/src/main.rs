@@ -1,4 +1,4 @@
-use clap::Parser;
+/*use clap::Parser;
 //use ex1::capitalize;
 
 #[derive(Parser, Debug)]
@@ -7,10 +7,10 @@ struct Args {
     #[clap(short, long)]
     sequence: String,
 }
-
+*/
 fn main() {
-    let args = Args::parse();
-    let s: String = args.sequence;
+   // let args = Args::parse();
+   // let s: String = args.sequence;
 
     //println!("{}",capitalize(&s)); // oppure println!("{}", capitalize(s.as_str))
 }
