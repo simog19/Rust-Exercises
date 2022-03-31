@@ -10,7 +10,6 @@ fn test_single_digit_strings_can_not_be_valid() {
 }
 
 #[test]
-#[ignore]
 fn test_a_single_zero_is_invalid() {
     process_valid_case("0", false);
 }
@@ -40,7 +39,6 @@ fn test_invalid_canadian_sin() {
 }
 
 #[test]
-#[ignore]
 fn test_invalid_credit_card() {
     process_valid_case("8273 1232 7352 0569", false);
 }
@@ -52,25 +50,21 @@ fn test_valid_number_with_an_even_number_of_digits() {
 }
 
 #[test]
-#[ignore]
 fn strings_that_contain_non_digits_are_invalid() {
     process_valid_case("055a 444 285", false);
 }
 
 #[test]
-#[ignore]
 fn test_valid_strings_with_punctuation_included_become_invalid() {
     process_valid_case("055-444-285", false);
 }
 
 #[test]
-#[ignore]
 fn symbols_are_invalid() {
     process_valid_case("055£ 444$ 285", false);
 }
 
 #[test]
-#[ignore]
 fn test_single_zero_with_space_is_invalid() {
     process_valid_case(" 0", false);
 }
@@ -88,7 +82,6 @@ fn test_input_digit_9_is_correctly_converted_to_output_digit_9() {
 }
 
 #[test]
-#[ignore]
 /// using ascii value for doubled non-digit isn't allowed
 /// Convert non-digits to their ascii values and then offset them by 48 sometimes accidentally declare an invalid string to be valid.
 /// This test is designed to avoid that solution.
@@ -97,21 +90,18 @@ fn test_using_ascii_value_for_doubled_nondigit_isnt_allowed() {
 }
 
 #[test]
-#[ignore]
 /// valid strings with a non-digit added at the end become invalid
 fn test_valid_strings_with_a_nondigit_added_at_the_end_become_invalid() {
     process_valid_case("059a", false);
 }
 
 #[test]
-#[ignore]
 /// valid strings with symbols included become invalid
 fn test_valid_strings_with_symbols_included_become_invalid() {
     process_valid_case("055# 444$ 285", false);
 }
 
 #[test]
-#[ignore]
 /// using ascii value for non-doubled non-digit isn't allowed
 /// Convert non-digits to their ascii values and then offset them by 48 sometimes accidentally declare an invalid string to be valid.
 /// This test is designed to avoid that solution.
