@@ -31,6 +31,8 @@ pub mod node{
 
 pub mod edge {
     use std::collections::HashMap;
+    use std::fmt;
+    use std::fmt::{Display, Formatter};
 
     #[derive(Debug, Clone, PartialEq)]
     pub struct Edge{
@@ -53,6 +55,16 @@ pub mod edge {
                 attrs: attrs.iter().map(|(key, value)| (key.to_string(), value.to_string())).collect(),
                 ..self
             }
+        }
+    }
+
+    impl Display for Edge{
+        fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result{
+            let attrs = self.attrs
+                .iter()
+                .map(|(key,value)|(String::from(format!("{}={}",key,value))))
+                .collect::<Vec<String>>().join(", ");
+            write!(f, "{} -- {} [{}]", self.node1, self.node2, attrs)
         }
     }
 

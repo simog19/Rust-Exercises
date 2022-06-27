@@ -1,5 +1,6 @@
 pub mod graph {
     use std::collections::HashMap;
+    use std::fmt;
     use crate::graph::graph_items::{edge, node};
 
     pub mod graph_items;
@@ -43,6 +44,16 @@ pub mod graph {
         pub fn get_node(&self, name: &str) -> Option<&node::Node> {
             self.nodes.iter().find(|node| node.name == name)
             //self.nodes.iter().find(|node| node.name == name)
+        }
+    }
+
+    impl fmt::Display for Graph{
+        fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+            let edges = self.edges
+                .iter()
+                .map(|edge|(edge.to_string()))
+                .collect::<Vec<String>>().join(" ");
+            write!(f, "strict graph {{{}}}",edges)
         }
     }
 }
