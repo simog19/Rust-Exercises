@@ -1,11 +1,10 @@
-use std::marker::PhantomData;
+use std::mem;
 
 pub struct CircularBuffer<T> {
-    // This field is here to make the template compile and not to
-    // complain about unused type parameter 'T'. Once you start
-    // solving the exercise, delete this field and the 'std::marker::PhantomData'
-    // import.
-    field: PhantomData<T>,
+    len: usize,
+    data: Vec<T>,
+    wrpos: usize,
+    rdpos: usize
 }
 
 #[derive(Debug, PartialEq)]
@@ -14,30 +13,54 @@ pub enum Error {
     FullBuffer,
 }
 
-impl<T> CircularBuffer<T> {
+impl<T: Default> CircularBuffer<T> {
     pub fn new(capacity: usize) -> Self {
-        unimplemented!(
-            "Construct a new CircularBuffer with the capacity to hold {}.",
-            match capacity {
-                1 => "1 element".to_string(),
-                _ => format!("{} elements", capacity),
-            }
-        );
+        let mut buf = Vec::with_capacity(capacity);
+        for _ in 0..capacity {
+            buf.push(T::default());
+        }
+        CircularBuffer{
+            data: buf,
+            wrpos: 0,
+            rdpos: 0,
+            len: 0
+        }
     }
 
     pub fn write(&mut self, _element: T) -> Result<(), Error> {
-        unimplemented!("Write the passed element to the CircularBuffer or return FullBuffer error if CircularBuffer is full.");
+        return if self.len == self.data.len() {
+            Err(Error::FullBuffer)
+        } else {
+            self.data[self.wrpos] = _element;
+            self.wrpos = (self.wrpos + 1) % self.data.len();
+            self.len += 1;
+            Ok(())
+        }
     }
 
     pub fn read(&mut self) -> Result<T, Error> {
-        unimplemented!("Read the oldest element from the CircularBuffer or return EmptyBuffer error if CircularBuffer is empty.");
+        if self.len == 0 {
+            return Err(Error::EmptyBuffer);
+        }
+        else {
+            //Replaces dest with the default value of T, returning the previous dest value.
+            let element = mem::take(&mut self.data[self.rdpos]);
+            self.rdpos = (self.rdpos + 1) % self.data.len();
+            self.len -= 1;
+            return Ok(element);
+        }
     }
 
     pub fn clear(&mut self) {
-        unimplemented!("Clear the CircularBuffer.");
+        while self.len>0{
+            self.read().unwrap();
+        }
     }
 
     pub fn overwrite(&mut self, _element: T) {
-        unimplemented!("Write the passed element to the CircularBuffer, overwriting the existing elements if CircularBuffer is full.");
+        if self.len == self.data.len(){
+            self.read().unwrap();
+        }
+        self.write(_element);
     }
 }
